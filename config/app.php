@@ -150,6 +150,7 @@ return [
 Acacha\AdminLTETemplateLaravel\app\Providers\AdminLTETemplateServiceProvider::class,
  Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
  Collective\Html\HtmlServiceProvider::class,
+ Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -201,6 +202,7 @@ Acacha\AdminLTETemplateLaravel\app\Providers\AdminLTETemplateServiceProvider::cl
 
          'Form'      => Collective\Html\FormFacade::class,
     'HTML'      => Collective\Html\HtmlFacade::class,
+    'Entrust' => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 
