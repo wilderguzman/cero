@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-   %%crudNameCap%% 
+   Roles 
 @endsection
 
 
@@ -10,38 +10,38 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">%%crudNameCap%% </div>
+                <div class="panel-heading">Roles </div>
 
                 <div class="panel-body">
                 <div class="table-responsive">
 
-    <h1>%%crudNameCap%% <a href="{{ url('/%%routeGroup%%%%crudName%%/create') }}" class="btn btn-primary btn-xs" title="Add New %%modelName%%"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Roles <a href="{{ url('/admin/roles/create') }}" class="btn btn-primary btn-xs" title="Add New Role"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th>%%formHeadingHtml%%<th>Acciones</th>
+                    <th>S.No</th><th> {{ trans('roles.name') }} </th><th> {{ trans('roles.display_name') }} </th><th> {{ trans('roles.description') }} </th><th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
             {{-- */$x=0;/* --}}
-            @foreach($%%crudName%% as $item)
+            @foreach($roles as $item)
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    %%formBodyHtml%%
+                    <td>{{ $item->name }}</td><td>{{ $item->display_name }}</td><td>{{ $item->description }}</td>
                     <td>
-                        <a href="{{ url('/%%routeGroup%%%%crudName%%/' . $item->%%primaryKey%%) }}" class="btn btn-success btn-xs" title="View %%modelName%%"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/%%routeGroup%%%%crudName%%/' . $item->%%primaryKey%% . '/edit') }}" class="btn btn-primary btn-xs" title="Edit %%modelName%%"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/roles/' . $item->id) }}" class="btn btn-success btn-xs" title="View Role"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/roles/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Role"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/%%routeGroup%%%%crudName%%', $item->%%primaryKey%%],
+                            'url' => ['/admin/roles', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete %%modelName%%" />', array(
+                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Role" />', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete %%modelName%%',
+                                    'title' => 'Delete Role',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ));!!}
                         {!! Form::close() !!}
@@ -50,7 +50,7 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $%%crudName%%->render() !!} </div>
+        <div class="pagination"> {!! $roles->render() !!} </div>
     </div>
 
                 </div>

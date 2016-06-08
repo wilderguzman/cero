@@ -1,9 +1,21 @@
-@extends('layouts.app')
+@extends('app')
 
-@section('content')
+@section('htmlheader_title')
+    %%modelName%% 
+@endsection
+
+
+@section('main-content')
 <div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">%%modelName%% </div>
 
-    <h1>Create New %%modelName%%</h1>
+                <div class="panel-body">
+                <div class="table-responsive">
+
+    <h1>Crear Nuevo %%modelName%%</h1>
     <hr/>
 
     {!! Form::open(['url' => '/%%routeGroup%%%%crudName%%', 'class' => 'form-horizontal']) !!}
@@ -12,7 +24,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit('Crear', ['class' => 'btn btn-primary form-control']) !!}
         </div>
     </div>
     {!! Form::close() !!}
@@ -25,5 +37,10 @@
         </ul>
     @endif
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-    %%modelName%%
+    Role
 @endsection
 
 
@@ -10,33 +10,33 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">%%modelName%%</div>
+                <div class="panel-heading">Role</div>
 
                 <div class="panel-body">
                 <div class="table-responsive">
 
-    <h1>%%modelName%% {{ $%%crudNameSingular%%->%%primaryKey%% }}</h1>
+    <h1>Role {{ $role->id }}</h1>
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
             <tbody>
                 <tr>
-                    <th>ID.</th><td>{{ $%%crudNameSingular%%->%%primaryKey%% }}</td>
+                    <th>ID.</th><td>{{ $role->id }}</td>
                 </tr>
-                %%formBodyHtmlForShowView%%
+                <tr><th> {{ trans('roles.name') }} </th><td> {{ $role->name }} </td></tr><tr><th> {{ trans('roles.display_name') }} </th><td> {{ $role->display_name }} </td></tr><tr><th> {{ trans('roles.description') }} </th><td> {{ $role->description }} </td></tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="2">
-                        <a href="{{ url('%%routeGroup%%%%crudName%%/' . $%%crudNameSingular%%->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit %%modelName%%"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('admin/roles/' . $role->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Role"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['%%routeGroup%%%%crudName%%', $%%crudNameSingular%%->id],
+                            'url' => ['admin/roles', $role->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete %%modelName%%',
+                                    'title' => 'Delete Role',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ));!!}
                         {!! Form::close() !!}

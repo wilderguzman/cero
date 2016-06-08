@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-   %%crudNameCap%% 
+   Users 
 @endsection
 
 
@@ -10,38 +10,38 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">%%crudNameCap%% </div>
+                <div class="panel-heading">Users </div>
 
                 <div class="panel-body">
                 <div class="table-responsive">
 
-    <h1>%%crudNameCap%% <a href="{{ url('/%%routeGroup%%%%crudName%%/create') }}" class="btn btn-primary btn-xs" title="Add New %%modelName%%"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Users <a href="{{ url('/admin/users/create') }}" class="btn btn-primary btn-xs" title="Add New User"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th>%%formHeadingHtml%%<th>Acciones</th>
+                    <th>S.No</th><th> {{ trans('users.name') }} </th><th> {{ trans('users.email') }} </th><th> {{ trans('users.password') }} </th><th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
             {{-- */$x=0;/* --}}
-            @foreach($%%crudName%% as $item)
+            @foreach($users as $item)
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    %%formBodyHtml%%
+                    <td>{{ $item->name }}</td><td>{{ $item->email }}</td><td>{{ $item->password }}</td>
                     <td>
-                        <a href="{{ url('/%%routeGroup%%%%crudName%%/' . $item->%%primaryKey%%) }}" class="btn btn-success btn-xs" title="View %%modelName%%"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/%%routeGroup%%%%crudName%%/' . $item->%%primaryKey%% . '/edit') }}" class="btn btn-primary btn-xs" title="Edit %%modelName%%"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/users/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/%%routeGroup%%%%crudName%%', $item->%%primaryKey%%],
+                            'url' => ['/admin/users', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete %%modelName%%" />', array(
+                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete User" />', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete %%modelName%%',
+                                    'title' => 'Delete User',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ));!!}
                         {!! Form::close() !!}
@@ -50,7 +50,7 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $%%crudName%%->render() !!} </div>
+        <div class="pagination"> {!! $users->render() !!} </div>
     </div>
 
                 </div>
