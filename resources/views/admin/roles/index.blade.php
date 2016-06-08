@@ -50,7 +50,7 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $roles->render() !!} </div>
+       
     </div>
 
                 </div>

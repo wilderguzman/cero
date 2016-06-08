@@ -12,11 +12,15 @@ use Session;
 
 class PermissionsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return Response
      */
+
+    
+    
     public function index()
     {
         $permissions = Permission::paginate(15);
@@ -27,7 +31,7 @@ class PermissionsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return void
+     * @return Response
      */
     public function create()
     {
@@ -37,7 +41,7 @@ class PermissionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return void
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -55,7 +59,7 @@ class PermissionsController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function show($id)
     {
@@ -69,7 +73,7 @@ class PermissionsController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function edit($id)
     {
@@ -83,7 +87,7 @@ class PermissionsController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function update($id, Request $request)
     {
@@ -102,7 +106,7 @@ class PermissionsController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function destroy($id)
     {
@@ -112,4 +116,5 @@ class PermissionsController extends Controller
 
         return redirect('admin/permissions');
     }
+
 }

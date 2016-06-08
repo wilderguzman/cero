@@ -9,43 +9,62 @@ use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
+use App\Role;
+use DB;
+
 
 class UsersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return Response
      */
+
+    
+   
     public function index()
     {
-        $users = User::paginate(15);
+
+
+        $users = User::with('roles')->get();
 
         return view('admin.users.index', compact('users'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return void
+     * @return Response
      */
     public function create()
     {
-        return view('admin.users.create');
+
+        $roles = Role::orderBy('display_name', 'asc')->lists('display_name', 'id');
+
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return void
+     * @return Response
      */
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required', 'email' => 'required', 'password' => 'required', ]);
 
-        User::create($request->all());
+       $user = User::create($request->all());
+
+        $user->password=(bcrypt($user->password));
+        
+       $user->save();
+       $user->attachRoles($request->input('role_id'));
 
         Session::flash('flash_message', 'User added!');
+
 
         return redirect('admin/users');
     }
@@ -55,13 +74,14 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function show($id)
     {
         $user = User::findOrFail($id);
 
-        return view('admin.users.show', compact('user'));
+        $roles = Role::orderBy('display_name', 'asc')->lists('display_name', 'id');
+        return view('admin.users.show', compact('user','roles'));
     }
 
     /**
@@ -69,13 +89,20 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function edit($id)
     {
+
+
         $user = User::findOrFail($id);
 
-        return view('admin.users.edit', compact('user'));
+        $roles_user = User::find($id)->roles()->lists('role_id')->toArray();
+
+        $roles = Role::orderBy('display_name', 'asc')->lists('display_name', 'id');
+        
+
+        return view('admin.users.edit', compact('user' , 'roles', 'roles_user'));
     }
 
     /**
@@ -83,7 +110,7 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function update($id, Request $request)
     {
@@ -94,6 +121,19 @@ class UsersController extends Controller
 
         Session::flash('flash_message', 'User updated!');
 
+
+            if($user->roles->count()) {
+
+                $user->roles()->detach($user->roles()->lists('role_id')->toArray());
+            }
+
+            $user->attachRoles($request->input('role_id'));
+
+            $user->password=(bcrypt($user->password));
+        
+       $user->save();
+
+
         return redirect('admin/users');
     }
 
@@ -102,7 +142,7 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function destroy($id)
     {
@@ -112,4 +152,6 @@ class UsersController extends Controller
 
         return redirect('admin/users');
     }
+
+    
 }

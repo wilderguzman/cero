@@ -10,16 +10,22 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 
+use App\Permission;
+
+
 class RolesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return Response
      */
+
     public function index()
     {
-        $roles = Role::paginate(15);
+        
+        $roles = Role::with('permissions')->get();
 
         return view('admin.roles.index', compact('roles'));
     }
@@ -27,23 +33,27 @@ class RolesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return void
+     * @return Response
      */
     public function create()
     {
-        return view('admin.roles.create');
+        $permissions = Permission::lists('display_name', 'id');
+        
+        return view('admin.roles.create' , compact('permissions'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return void
+     * @return Response
      */
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required', 'display_name' => 'required', ]);
 
-        Role::create($request->all());
+        $roles=Role::create($request->all());
+        
+        $roles->attachPermissions($request->input('permission_id'));
 
         Session::flash('flash_message', 'Role added!');
 
@@ -55,7 +65,7 @@ class RolesController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function show($id)
     {
@@ -69,13 +79,19 @@ class RolesController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function edit($id)
     {
         $role = Role::findOrFail($id);
 
-        return view('admin.roles.edit', compact('role'));
+        $permission_role = Role::find($id)->permissions()->lists('permission_id')->toArray();
+
+        $permissions = Permission::lists('display_name', 'id');
+
+        return view('admin.roles.edit', compact('role', 'permissions', 'permission_role'));
+
+
     }
 
     /**
@@ -83,7 +99,7 @@ class RolesController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function update($id, Request $request)
     {
@@ -92,9 +108,24 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update($request->all());
 
+
+        if($role->permissions->count()) {
+
+               $role->permissions()->detach($role->permissions()->lists('permission_id')->toArray());
+            }
+
+        $role->attachPermissions($request->input('permission_id'));
+
         Session::flash('flash_message', 'Role updated!');
 
         return redirect('admin/roles');
+
+           
+
+            
+
+
+
     }
 
     /**
@@ -102,7 +133,7 @@ class RolesController extends Controller
      *
      * @param  int  $id
      *
-     * @return void
+     * @return Response
      */
     public function destroy($id)
     {
@@ -112,4 +143,5 @@ class RolesController extends Controller
 
         return redirect('admin/roles');
     }
+
 }

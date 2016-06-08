@@ -7,6 +7,16 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
 
+
+            
+             <script src="{{ asset('js/jquery-multi-select/js/jquery.multi-select.js') }}"></script>
+             
+             <script src="{{ asset('js/jquery-multi-select/js/jquery.quicksearch.js') }}"></script>
+             
+             <script src="{{ asset('js/jquery-multi-select/js/jquery.tinysort.js') }}"></script>
+                <script src="{{ asset('js/multi-select-init.js') }}"></script>
+
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the

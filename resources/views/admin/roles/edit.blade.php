@@ -45,6 +45,18 @@
                 </div>
             </div>
 
+              <div class="form-group">
+                {!! Form::label('permisos', 'Permisos: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+
+                    {!! Form::select('permission_id[]', $permissions, isset($permission_role) ? $permission_role : null, array(
+                    'multiple' => true, 'class' => 'multi-select', 'id' => 'permissionSelect')) !!}
+
+                </div>
+            </div>
+
+            
+
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">

@@ -42,6 +42,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                {!! Form::label('roles', 'Roles: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+
+                {!! Form::select('role_id[]', $roles, isset($roles_user) ? $roles_user : null, array(
+                'multiple' => true, 'class' => 'multi-select', 'id' => 'roleSelect')) !!}
+
+                </div>
+            </div>
+
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
