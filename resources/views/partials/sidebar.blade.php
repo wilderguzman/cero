@@ -40,7 +40,8 @@
                     <li><a href="{{ url('admin/permissions') }}">Permisos</a></li>
                 </ul>
             </li>
-
+            <li class="active"><a href="{{ url('sis/asegurado') }}"><i class='fa fa-link'></i> <span>Asegurado</span></a></li>
+            
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>Home</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
             <li class="treeview">
