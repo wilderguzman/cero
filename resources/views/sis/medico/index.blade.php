@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('htmlheader_title')
-   Users 
+   Medico 
 @endsection
 
 
@@ -10,54 +10,38 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Users </div>
+                <div class="panel-heading">Medico </div>
 
                 <div class="panel-body">
                 <div class="table-responsive">
 
-    <h1>Users <a href="{{ url('/admin/users/create') }}" class="btn btn-primary btn-xs" title="Add New User"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Medico <a href="{{ url('/sis/medico/create') }}" class="btn btn-primary btn-xs" title="Add New Medico"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th> {{ trans('users.name') }} </th><th> {{ trans('users.email') }} </th><th>Roles</th><th>Acciones</th>
+                    <th>S.No</th><th> {{ trans('medico.horario') }} </th><th> {{ trans('medico.especialidad') }} </th><th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
             {{-- */$x=0;/* --}}
-            @foreach($users as $item)
+            @foreach($medico as $item)
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->name }}</td><td>{{ $item->email }}</td><td> 
-
-
-
-
-
-                    @foreach($item->roles as $roles)
-
-                   <li> {{ $roles->display_name }} </li>
-
-
-
-                   @endforeach
-
-
-
-                     </td>
+                    <td>{{ $item->horario }}</td><td>{{ $item->especialidad }}</td>
                     <td>
-                        <a href="{{ url('/admin/users/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/sis/medico/' . $item->id) }}" class="btn btn-success btn-xs" title="View Medico"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/sis/medico/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Medico"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/admin/users', $item->id],
+                            'url' => ['/sis/medico', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete User" />', array(
+                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Medico" />', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete User',
+                                    'title' => 'Delete Medico',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ));!!}
                         {!! Form::close() !!}
@@ -66,7 +50,7 @@
             @endforeach
             </tbody>
         </table>
-       
+        <div class="pagination"> {!! $medico->render() !!} </div>
     </div>
 
                 </div>

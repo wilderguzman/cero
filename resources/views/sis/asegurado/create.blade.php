@@ -65,12 +65,7 @@
             <div class="form-group {{ $errors->has('sexo') ? 'has-error' : ''}}">
                 {!! Form::label('sexo', trans('asegurado.sexo'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                                <div class="checkbox">
-                <label>{!! Form::radio('sexo', '1') !!} Masculino</label>
-            </div>
-            <div class="checkbox">
-                <label>{!! Form::radio('sexo', '0', true) !!} Feminino</label>
-            </div>
+                    {!! Form::text('sexo', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('sexo', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -98,14 +93,14 @@
             <div class="form-group {{ $errors->has('tipo_de_asegurado') ? 'has-error' : ''}}">
                 {!! Form::label('tipo_de_asegurado', trans('asegurado.tipo_de_asegurado'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::number('tipo_de_asegurado', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::text('tipo_de_asegurado', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('tipo_de_asegurado', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group {{ $errors->has('n_historial') ? 'has-error' : ''}}">
                 {!! Form::label('n_historial', trans('asegurado.n_historial'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::number('n_historial', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::text('n_historial', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('n_historial', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>

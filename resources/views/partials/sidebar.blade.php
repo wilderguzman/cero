@@ -41,7 +41,11 @@
                 </ul>
             </li>
             <li class="active"><a href="{{ url('sis/asegurado') }}"><i class='fa fa-link'></i> <span>Asegurado</span></a></li>
-            
+            <li class="active"><a href="{{ url('sis/personal') }}"><i class='fa fa-link'></i> <span>Personal</span></a></li>
+            <li class="active"><a href="{{ url('sis/medico') }}"><i class='fa fa-link'></i> <span>Medico</span></a></li>
+            <li class="active"><a href="{{ url('sis/medicamento') }}"><i class='fa fa-link'></i>medicamento<span></span></a></li>
+            <li class="active"><a href="{{ url('sis/receta') }}"><i class='fa fa-link'></i> <span>Receta</span></a></li>
+
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>Home</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
             <li class="treeview">

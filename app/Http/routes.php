@@ -18,4 +18,9 @@ Route::get('/', function () {
 Route::resource('admin/permissions', 'Admin\\PermissionsController');
 Route::resource('admin/roles', 'Admin\\RolesController');
 Route::resource('admin/users', 'Admin\\UsersController');
+
 Route::resource('sis/asegurado', 'Sis\\AseguradoController');
+Route::resource('sis/personal', 'Sis\\PersonalController');
+Route::resource('sis/medico', 'Sis\\MedicoController');
+Route::resource('sis/medicamento', 'Sis\\MedicamentoController');
+Route::resource('sis/receta', 'Sis\\RecetaController');

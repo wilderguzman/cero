@@ -7,4 +7,25 @@ php artisan crud:generate Roles --fields="name#string#required, display_name#str
 php artisan crud:generate Permissions --fields="name#string#required, display_name#string#required, description#string" --route=yes --pk=id --view-path="admin" --namespace=Admin --route-group=admin
 
 
-php artisan crud:generate Asegurado --fields="nombre#string#required,a_paterno#string#required,a_materno#string#required,c_i#integer#required,beneficiario_ci#integer#required,fecha_de_nac#date#required,sexo#boolean#required,grado#string#required,fuerza#string#required,titular#string#required,tipo_de_asegurado#integer#required,n_historial#integer#required" --route=yes --pk=id --view-path="sis" --namespace=Sis --route-group=sis
+php artisan crud:generate Asegurado --fields="nombre#string#required,a_paterno#string#required,a_materno#string#required,c_i#integer#required,beneficiario_ci#integer#required,fecha_de_nac#date#required,sexo#string#required,grado#string#required,fuerza#string#required,titular#string#required,tipo_de_asegurado#string#required,n_historial#string#required" --route=yes --pk=id --view-path="sis" --namespace=Sis --route-group=sis
+
+
+php artisan crud:generate Personal --fields="nombre#string#required,a_paterno#string#required,a_materno#string#required,ci#integer#required,fecha_de_nac#date#required,matricula#integer#required,telefono#number,direccion#string" --route=yes --pk=id --view-path="sis" --namespace=Sis --route-group=sis
+
+
+php artisan crud:generate Medico --fields="horario#time#required,especialidad#string#required" --route=yes --pk=id --view-path="sis" --namespace=Sis --route-group=sis
+
+
+php artisan crud:generate Medicamento --fields="codigo#string#required,nombre#string#required,cantidad#integer#required" --route=yes --pk=id --view-path="sis" --namespace=Sis --route-group=sis
+
+
+
+php artisan crud:generate Receta --fields="n_receta#string#required,fecha#date#required,modo_uso#text#required,estado_receta#string,f_ini_tra#date#required,f_fin_tra#date#required" --route=yes --pk=id --view-path="sis" --namespace=Sis --route-group=sis
+
+
+
+
+
+
+
+
