@@ -2,6 +2,8 @@
 
 return [
     'n_receta' => 'N Receta',
+    'medico' => 'Medico',
+    'asegurado' => 'Asegurado',
 'fecha' => 'Fecha',
 'modo_uso' => 'Modo Uso',
 'estado_receta' => 'Estado Receta',

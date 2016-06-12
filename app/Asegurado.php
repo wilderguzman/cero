@@ -26,4 +26,9 @@ class Asegurado extends Model
      * @var array
      */
     protected $fillable = ['nombre', 'a_paterno', 'a_materno', 'c_i', 'beneficiario_ci', 'fecha_de_nac', 'sexo', 'grado', 'fuerza', 'titular', 'tipo_de_asegurado', 'n_historial'];
+
+          public function receta()
+    {
+        return $this->belongsToMany('App\Receta');
+    }
 }

@@ -9,6 +9,7 @@ use App\Recetum;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
+use App\Asegurado;
 
 class RecetaController extends Controller
 {
@@ -31,7 +32,12 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        return view('sis.receta.create');
+
+         $datem = Carbon::now();
+         $datem->format('Y-m-d');
+
+         $asegurado=Asegurado::orderBy('nombre', 'asc')->lists('nombre', 'id');
+        return view('sis.receta.create', compact('datem','asegurado'));
     }
 
     /**
@@ -75,7 +81,12 @@ class RecetaController extends Controller
     {
         $recetum = Recetum::findOrFail($id);
 
-        return view('sis.receta.edit', compact('recetum'));
+        $datem = Carbon::now();
+         $datem->format('Y-m-d');
+
+         $asegurado=Asegurado::orderBy('nombre', 'asc')->lists('nombre', 'id');
+
+        return view('sis.receta.edit', compact('recetum','datem','asegurado'));
     }
 
     /**

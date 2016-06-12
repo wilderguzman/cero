@@ -25,5 +25,18 @@ class Recetum extends Model
      *
      * @var array
      */
-    protected $fillable = ['n_receta', 'fecha', 'modo_uso', 'estado_receta', 'f_ini_tra', 'f_fin_tra'];
+    protected $fillable = ['n_receta', 'medico_id','asegurado_id','fecha','modo_uso', 'estado_receta', 'f_ini_tra', 'f_fin_tra'];
+
+        public function medico()
+    {
+        return $this->belongsTo('App\Medico');
+    }
+
+
+        public function asegurado()
+    {
+        return $this->belongsTo('App\asegurado');
+    }
+
+
 }

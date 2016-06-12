@@ -26,4 +26,10 @@ class Medico extends Model
      * @var array
      */
     protected $fillable = ['horario', 'especialidad'];
+
+        public function receta()
+    {
+        return $this->belongsToMany('App\Receta');
+    }
+
 }

@@ -27,10 +27,35 @@
                     {!! $errors->first('n_receta', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+
+
+
+
+
+             <div class="form-group {{ $errors->has('nombre') ? 'has-error' : ''}}">
+                {!! Form::label('medico', trans('receta.medico'), ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+
+                {!! Form::hidden('medico_id', $user=Auth::user()->id , ['class' => 'form-control']) !!}
+
+                    {!! Form::label('medico', $user=Auth::user()->name , ['class' => 'form-control', 'required' => 'required','readonly' => 'true']) !!}
+                    {!! $errors->first('nombre', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+            <div class="form-group {{ $errors->has('grupo') ? 'has-error' : ''}}">
+                {!! Form::label('asegurado', trans('receta.asegurado'), ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::select('asegurado_id', $asegurado, null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('asegurado', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+
             <div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
                 {!! Form::label('fecha', trans('receta.fecha'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::date('fecha', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::date('fecha', $datem, ['class' => 'form-control', 'required' => 'required','readonly' => 'true']) !!}
                     {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -44,7 +69,10 @@
             <div class="form-group {{ $errors->has('estado_receta') ? 'has-error' : ''}}">
                 {!! Form::label('estado_receta', trans('receta.estado_receta'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('estado_receta', null, ['class' => 'form-control']) !!}
+                    {!! Form::select('estado_receta', [ 'registrado' => 'Registrar', 'borrador' => 'Borrador' ],null, ['class' => 'form-control']) !!}
+
+
+                    
                     {!! $errors->first('estado_receta', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>

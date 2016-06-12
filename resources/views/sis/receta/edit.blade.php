@@ -30,13 +30,50 @@
                     {!! $errors->first('n_receta', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+
+
+
+
+
+             <div class="form-group {{ $errors->has('nombre') ? 'has-error' : ''}}">
+                {!! Form::label('medico', trans('receta.medico'), ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                @if(Auth::check() && Auth::user()->hasRole('medico')) 
+
+                {!! Form::hidden('medico_id', $user=Auth::user()->id , ['class' => 'form-control']) !!}
+
+                @endif
+
+                    {!! Form::text('medico_id', null , ['class' => 'form-control', 'required' => 'required','readonly' => 'true']) !!}
+                    {!! $errors->first('nombre', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="form-group {{ $errors->has('grupo') ? 'has-error' : ''}}">
+                {!! Form::label('asegurado', trans('receta.asegurado'), ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::select('asegurado_id', $asegurado, null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('asegurado', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+
+
+
+
             <div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
                 {!! Form::label('fecha', trans('receta.fecha'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::date('fecha', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::date('fecha', $datem, ['class' => 'form-control', 'required' => 'required','readonly' => 'true']) !!}
                     {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+
+
             <div class="form-group {{ $errors->has('modo_uso') ? 'has-error' : ''}}">
                 {!! Form::label('modo_uso', trans('receta.modo_uso'), ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
@@ -46,10 +83,35 @@
             </div>
             <div class="form-group {{ $errors->has('estado_receta') ? 'has-error' : ''}}">
                 {!! Form::label('estado_receta', trans('receta.estado_receta'), ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::text('estado_receta', null, ['class' => 'form-control']) !!}
+
+                @if(Auth::check() && Auth::user()->hasRole('medico')) 
+                  <div class="col-sm-6">
+                    {!! Form::select('estado_receta', [ 'registrado' => 'Registrar', 'borrador' => 'Borrador' ],null, ['class' => 'form-control']) !!}
+
+
+                    
                     {!! $errors->first('estado_receta', '<p class="help-block">:message</p>') !!}
                 </div>
+                @endif
+                @if(Auth::check() && Auth::user()->hasRole('supervisor')) 
+                  <div class="col-sm-6">
+                    {!! Form::select('estado_receta', [ 'autorizado' => 'Autorizar', 'borrador' => 'Rechazar' ],null, ['class' => 'form-control']) !!}
+
+
+                    
+                    {!! $errors->first('estado_receta', '<p class="help-block">:message</p>') !!}
+                </div>
+
+                @endif
+                @if(Auth::check() && Auth::user()->hasRole('farmacia')) 
+                <div class="col-sm-6">
+                    {!! Form::select('estado_receta', [ 'entregado' => 'Entregar', 'borrador' => 'Rechazar' ],null, ['class' => 'form-control']) !!}
+
+
+                    
+                    {!! $errors->first('estado_receta', '<p class="help-block">:message</p>') !!}
+                </div>
+                @endif
             </div>
             <div class="form-group {{ $errors->has('f_ini_tra') ? 'has-error' : ''}}">
                 {!! Form::label('f_ini_tra', trans('receta.f_ini_tra'), ['class' => 'col-sm-3 control-label']) !!}
